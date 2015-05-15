@@ -23,9 +23,9 @@ describe('stats', function() {
   });
 
   it('stats on toggleView', function() {
-    eventbus.toggleView(core.constants.VIEW_STATS);
+    stats.visible = true;
     testUA.isVisible(statsview.stats, true);
-    eventbus.toggleView(core.constants.VIEW_STATS);
+    stats.visible = false;
     testUA.isVisible(statsview.stats, false);
   });
 });
