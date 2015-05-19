@@ -22,10 +22,10 @@ describe('stats', function() {
     testUA.isVisible(statsview.stats, false);
   });
 
-  it('stats on toggleView', function() {
-    stats.visible = true;
+  it('stats show and hide', function() {
+    stats.show();
     testUA.isVisible(statsview.stats, true);
-    stats.visible = false;
+    stats.hide();
     testUA.isVisible(statsview.stats, false);
   });
 });
