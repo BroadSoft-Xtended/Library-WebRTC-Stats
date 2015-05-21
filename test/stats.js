@@ -15,7 +15,7 @@ describe('stats', function() {
     testUA.createModelAndView('stats', {
       stats: require('../')
     });
-    eventbus = bdsft_client_instances.eventbus_test;
+    eventbus = bdsft_client_instances.test.eventbus;
   });
 
   it('stats on startup', function() {
