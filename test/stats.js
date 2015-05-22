@@ -18,14 +18,19 @@ describe('stats', function() {
     eventbus = bdsft_client_instances.test.eventbus;
   });
 
-  it('stats on startup', function() {
+  it('on startup', function() {
     testUA.isVisible(statsview.stats, false);
   });
 
-  it('stats show and hide', function() {
+  it('show and hide', function() {
     stats.show();
     testUA.isVisible(statsview.stats, true);
     stats.hide();
     testUA.isVisible(statsview.stats, false);
+  });
+
+  it('statsContainerId', function() {
+    stats.statsContainerId = 'teststatscontainerid';
+    expect(statsview.statsContainer.attr('id')).toEqual('teststatscontainerid');
   });
 });
