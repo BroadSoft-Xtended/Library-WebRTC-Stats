@@ -8,9 +8,9 @@ describe('stats', function() {
     core = require('webrtc-core');
     testUA = core.testUA;
     ExSIP = core.exsip;
-    config = {};
-    testUA.createCore('configuration', config);
-    testUA.createCore('sipstack', config);
+    core.utils.isChrome = function(){return true;}
+    core.utils.majorVersion = function(){return 42;}
+    testUA.createCore('sipstack');
     testUA.mockWebRTC();
     testUA.createModelAndView('stats', {
       stats: require('../')
