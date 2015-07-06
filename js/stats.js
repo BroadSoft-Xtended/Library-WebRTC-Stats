@@ -1695,36 +1695,40 @@ function Stats(callback) {
    *     stat, and the odd index entry is the value.
    */
   self.addStats = function addStats(data) {
-    var peerConnectionElement = getPeerConnectionElement(data);
-    if (!peerConnectionElement)
+    var peerConnectionElements = getPeerConnectionElement(data);
+    if (!peerConnectionElements || !peerConnectionElements.length) {
       return;
+    }
 
     //    console.log("addStats : "+ExSIP.Utils.toString(data));
-    for (var i = 0; i < data.reports.length; ++i) {
-      var report = data.reports[i];
-      drawSingleReport(peerConnectionElement, report.type, report.id, report.stats);
-      statsTable.addStatsReport(peerConnectionElement, report.type, report.id, report);
+    for (var j = 0; j < peerConnectionElements.length; j++) {
+      var peerConnectionElement = peerConnectionElements[j];
+      for (var i = 0; i < data.reports.length; ++i) {
+        var report = data.reports[i];
+        drawSingleReport(peerConnectionElement, report.type, report.id, report.stats);
+        statsTable.addStatsReport(peerConnectionElement, report.type, report.id, report);
 
-      if (isVideoStats(report.stats.values)) {
-        var oneMinAgo = new Date(new Date().getTime() - 1000 * 60);
-        var videoPacketsLost = self.getLastValue(peerConnectionElement, report.type, report.id, "packetsLost");
-        var packetsSent = self.getLastValue(peerConnectionElement, report.type, report.id, "packetsReceived");
-        if (videoPacketsLost != null && packetsSent != null) {
-          var videoPacketsLostOneMinAgo = getValueBefore(peerConnectionElement, report.type, report.id, "packetsLost", oneMinAgo);
-          var packetsSentOneMinAgo = getValueBefore(peerConnectionElement, report.type, report.id, "packetsReceived", oneMinAgo);
-          var quality = ((videoPacketsLost - videoPacketsLostOneMinAgo) / (packetsSent - packetsSentOneMinAgo)) * 100
-          if (quality < 10) {
-            $("#quality1").fadeIn(10);
-            $("#quality2, #quality3, #quality4").fadeOut(10);
-          } else if (quality > 10 && quality < 20) {
-            $("#quality2").fadeIn(10);
-            $("#quality1, #quality3, #quality4").fadeOut(10);
-          } else if (quality > 20 && quality < 100) {
-            $("#quality3").fadeIn(10);
-            $("#quality1, #quality2, #quality4").fadeOut(10);
-          } else if (quality > 100 && quality < 1000) {
-            $("#quality4").fadeIn(10);
-            $("#quality1, #quality2, #quality3").fadeOut(10);
+        if (isVideoStats(report.stats.values)) {
+          var oneMinAgo = new Date(new Date().getTime() - 1000 * 60);
+          var videoPacketsLost = self.getLastValue(peerConnectionElement, report.type, report.id, "packetsLost");
+          var packetsSent = self.getLastValue(peerConnectionElement, report.type, report.id, "packetsReceived");
+          if (videoPacketsLost != null && packetsSent != null) {
+            var videoPacketsLostOneMinAgo = getValueBefore(peerConnectionElement, report.type, report.id, "packetsLost", oneMinAgo);
+            var packetsSentOneMinAgo = getValueBefore(peerConnectionElement, report.type, report.id, "packetsReceived", oneMinAgo);
+            var quality = ((videoPacketsLost - videoPacketsLostOneMinAgo) / (packetsSent - packetsSentOneMinAgo)) * 100
+            if (quality < 10) {
+              $("#quality1").fadeIn(10);
+              $("#quality2, #quality3, #quality4").fadeOut(10);
+            } else if (quality > 10 && quality < 20) {
+              $("#quality2").fadeIn(10);
+              $("#quality1, #quality3, #quality4").fadeOut(10);
+            } else if (quality > 20 && quality < 100) {
+              $("#quality3").fadeIn(10);
+              $("#quality1, #quality2, #quality4").fadeOut(10);
+            } else if (quality > 100 && quality < 1000) {
+              $("#quality4").fadeIn(10);
+              $("#quality1, #quality2, #quality3").fadeOut(10);
+            }
           }
         }
       }
@@ -1734,7 +1738,7 @@ function Stats(callback) {
   }
 
   function getPeerConnectionElement(data) {
-    return callback.getPeerConnectionElement(data) || $('[id="' + getPeerConnectionId(data) + '"]')[0];
+    return $('[id="' + getPeerConnectionId(data) + '"]');
   }
 
   /**

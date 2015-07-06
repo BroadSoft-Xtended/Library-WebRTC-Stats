@@ -15,18 +15,17 @@ describe('stats', function() {
     testUA.createModelAndView('stats', {
       stats: require('../')
     });
-    eventbus = bdsft_client_instances.test.eventbus;
   });
 
   it('on startup', function() {
-    testUA.isVisible(statsview.stats, false);
+    testUA.isVisible(statsview.view.find('.classes:first'), false);
   });
 
   it('show and hide', function() {
     stats.show();
-    testUA.isVisible(statsview.stats, true);
+    testUA.isVisible(statsview.view.find('.classes:first'), true);
     stats.hide();
-    testUA.isVisible(statsview.stats, false);
+    testUA.isVisible(statsview.view.find('.classes:first'), false);
   });
 
   it('statsContainerId', function() {

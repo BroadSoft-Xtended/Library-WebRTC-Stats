@@ -1,9 +1,8 @@
-.bdsft-client
+.bdsft-webrtc
   .stats
     position absolute
     top 10px
-    left 660px
-    width 400px
+    width auto
     top auto
     bottom 40px
     right 0
@@ -14,7 +13,10 @@
     box-shadow none
     color #999999
     z-index 200
-    padding 10px
+    padding 5px
+    .table
+      width auto
+      border-spacing 5px
     .statsVideo
       position absolute
       white-space pre-wrap
@@ -39,31 +41,103 @@
     .statsDelay
       display none
 
+    .videoKiloBitsSentPerSecondRow,
+    .audioKiloBitsSentPerSecondRow,
+    .videoKiloBitsReceivedPerSecondRow,
+    .audioKiloBitsReceivedPerSecondRow,
+    .videoPacketsLostRow,
+    .videoPacketsLostPerRow,
+    .audioPacketsLostRow,
+    .audioPacketsLostPerRow,
+    .videoGoogFrameRateSentRow,
+    .videoGoogFrameRateReceivedRow,
+    .audioAudioInputLevelRow,
+    .audioAudioOutputLevelRow,
+    .videoGoogFrameWidthReceivedRow,
+    .videoGoogFrameHeightReceivedRow,
+    .videoGoogFrameWidthSentRow,
+    .videoGoogFrameHeightSentRow,
+    .audioGoogRttRow,
+    .audioGoogJitterReceivedRow,
+    .videoStats,
+    .audioStats
+    &[class*="hasAudio"] .noStats,
+    &[class*="hasVideo"] .noStats
+    & [class*="avg"]
+      display none
+
+    &.hasVideoKiloBitsSentPerSecond .videoKiloBitsSentPerSecondRow,
+    &.hasAudioKiloBitsSentPerSecond .audioKiloBitsSentPerSecondRow,
+    &.hasVideoKiloBitsReceivedPerSecond .videoKiloBitsReceivedPerSecondRow,
+    &.hasAudioKiloBitsReceivedPerSecond .audioKiloBitsReceivedPerSecondRow,
+    &.hasVideoPacketsLost .videoPacketsLostRow, 
+    &.hasVideoPacketsLostPer .videoPacketsLostPerRow,
+    &.hasVideoPacketsLostPer .videoPacketsLostRow,
+    &.hasAudioPacketsLost .audioPacketsLostRow,
+    &.hasAudioPacketsLostPer .audioPacketsLostPerRow,
+    &.hasAudioPacketsLostPer .audioPacketsLostRow,
+    &.hasVideoGoogFrameRateSent .videoGoogFrameRateSentRow,
+    &.hasVideoGoogFrameRateReceived .videoGoogFrameRateReceivedRow,
+    &.hasAudioAudioInputLevel .audioAudioInputLevelRow,
+    &.hasAudioAudioOutputLevel .audioAudioOutputLevelRow,
+    &.hasVideoGoogFrameWidthReceived .videoGoogFrameWidthReceivedRow,
+    &.hasVideoGoogFrameHeightReceived .videoGoogFrameHeightReceivedRow,
+    &.hasVideoGoogFrameWidthSent .videoGoogFrameWidthSentRow,
+    &.hasVideoGoogFrameHeightSent .videoGoogFrameHeightSentRow,
+    &.hasAudioGoogRtt .audioGoogRttRow,
+    &.hasAudioGoogJitterReceived .audioGoogJitterReceivedRow,
+    &.hasAvgVideoKiloBitsSentPerSecond .avgVideoKiloBitsSentPerSecondRow,
+    &.hasAvgAudioKiloBitsSentPerSecond .avgAudioKiloBitsSentPerSecondRow,
+    &.hasAvgVideoKiloBitsReceivedPerSecond .avgVideoKiloBitsReceivedPerSecondRow,
+    &.hasAvgAudioKiloBitsReceivedPerSecond .avgAudioKiloBitsReceivedPerSecondRow,
+    &.hasAvgVideoPacketsLost .avgVideoPacketsLostRow, 
+    &.hasAvgVideoPacketsLostPer .avgVideoPacketsLostPerRow,
+    &.hasAvgVideoPacketsLostPer .avgVideoPacketsLostRow,
+    &.hasAvgAudioPacketsLost .avgAudioPacketsLostRow,
+    &.hasAvgAudioPacketsLostPer .avgAudioPacketsLostPerRow,
+    &.hasAvgAudioPacketsLostPer .avgAudioPacketsLostRow,
+    &.hasAvgVideoGoogFrameRateSent .avgVideoGoogFrameRateSentRow,
+    &.hasAvgVideoGoogFrameRateReceived .avgVideoGoogFrameRateReceivedRow,
+    &.hasAvgAudioAudioInputLevel .avgAudioAudioInputLevelRow,
+    &.hasAvgAudioAudioOutputLevel .avgAudioAudioOutputLevelRow,
+    &.hasAvgVideoGoogFrameWidthReceived .avgVideoGoogFrameWidthReceivedRow,
+    &.hasAvgVideoGoogFrameHeightReceived .avgVideoGoogFrameHeightReceivedRow,
+    &.hasAvgVideoGoogFrameWidthSent .avgVideoGoogFrameWidthSentRow,
+    &.hasAvgVideoGoogFrameHeightSent .avgVideoGoogFrameHeightSentRow,
+    &.hasAvgAudioGoogRtt .avgAudioGoogRttRow,
+    &.hasAvgAudioGoogJitterReceived .avgAudioGoogJitterReceivedRow
+      display block
+
+    &[class*="hasAudio"] .audioStats,
+    &[class*="hasVideo"] .videoStats
+      display table-cell
+      width 220px
+    
+    &.videoKiloBitsSentPerSecond .kiloBitsSentPerSecond-video,
+    &.audioKiloBitsSentPerSecond .kiloBitsSentPerSecond-audio,
+    &.videoKiloBitsReceivedPerSecond .kiloBitsReceivedPerSecond-video,
+    &.audioKiloBitsReceivedPerSecond .kiloBitsReceivedPerSecond-audio,
+    &.videoPacketsLost [id*="send-graph-container"] .packetsLost-video,
+    &.videoPacketsLostPer [id*="send-graph-container"] .packetsLostPer-video,
+    &.audioPacketsLost [id*="send-graph-container"] .packetsLost-audio,
+    &.audioPacketsLostPer [id*="send-graph-container"] .packetsLostPer-audio,
+    &.videoGoogFrameRateSent .googFrameRateSent-video,
+    &.videoGoogFrameRateReceived .googFrameRateReceived-video,
+    &.audioAudioOutputLevel .audioOutputLevel-audio,
+    &.audioAudioInputLevel .audioInputLevel-audio,
+    &.videoGoogFrameWidthReceived .googFrameWidthReceived-video,
+    &.videoGoogFrameHeightReceived .googFrameHeightReceived-video,
+    &.videoGoogFrameWidthSent .googFrameWidthSent-video,
+    &.videoGoogFrameHeightSent .googFrameHeightSent-video,
+    &.audioGoogRtt .googRtt-audio,
+    &.audioGoogJitterReceived .googJitterReceived-audio
+      display block
+
   .stats-table-container, .stats-graph-sub-container
     display none
 
-  .stats0-selected .kiloBitsSentPerSecond-video,
-  .stats1-selected .kiloBitsSentPerSecond-audio,
-  .stats2-selected .kiloBitsReceivedPerSecond-video,
-  .stats3-selected .kiloBitsReceivedPerSecond-audio,
-  .stats4-selected .packetsLost-video,
-  .stats5-selected .packetsLostPer-video,
-  .stats6-selected .packetsLost-audio,
-  .stats7-selected .packetsLostPer-audio,
-  .stats8-selected .googFrameRateSent-video,
-  .stats9-selected .googFrameRateReceived-video,
-  .stats10-selected .audioOutputLevel-audio,
-  .stats11-selected .audioInputLevel-audio,
-  .stats12-selected .googFrameWidthReceived-video,
-  .stats13-selected .googFrameHeightReceived-video,
-  .stats14-selected .googFrameWidthSent-video,
-  .stats15-selected .googFrameHeightSent-video,
-  .stats16-selected .googRtt-audio,
-  .stats17-selected .googJitterReceived-audio
-    display block
-
   @css {
-    .bdsft-client .callStats {
+    .bdsft-webrtc .callStats {
       color: <%= statsColor %>;
     }
   }
@@ -71,9 +145,6 @@
   .stats-graph-sub-container
     canvas
       width 100%
-
-  .statsContainer
-    margin-bottom 18px
 
   .stats.enableCallStats.stats-shown
     {fadeInPopup}
