@@ -10,10 +10,13 @@ describe('stats', function() {
     ExSIP = core.exsip;
     core.utils.isChrome = function(){return true;}
     core.utils.majorVersion = function(){return 42;}
-    testUA.createCore('sipstack');
+    testUA.createModelAndView('sipstack', {
+      sipstack: require('webrtc-sipstack')
+    });
     testUA.mockWebRTC();
     testUA.createModelAndView('stats', {
-      stats: require('../')
+      stats: require('../'),
+      sipstack: require('webrtc-sipstack'),
     });
   });
 
