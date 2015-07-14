@@ -3,7 +3,9 @@
 Displays stats for the active call.
 
 Model : bdsft_webrtc.default.stats
+
 View : bdsft_webrtc.default.statsview
+
 Dependencies : [SIP Stack](https://github.com/BroadSoft-Xtended/Library-WebRTC-SIPStack)
 
 ## Elements
